@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Creator Prototype - by pixlerin</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <script src="./dom-to-image.min.js"></script>
+    <div class="window">
+      <div class="window-header">
+        <h2>>Character-Creator Prototype</h2>
+        <button class="toggle" onclick="dialog.showModal();">?</button>
+        <dialog id="dialog" class="window">
+          <div class="dialog-header">
+            <h2>>help</h2>
+            <form method="dialog">
+              <button class="close toggle">X</button>
+            </form>
+          </div>
+          <div class="dialog-content">
+            <p>
+              This is a prototype for a character creator that I will develop for my game
+              &quot;The Lost Hotel&quot;.
+            </p>
+            <p>
+              You can change the settings as you like and when you are happy with the result,
+              press the download button to get a picture of your character.
+            </p>
+            <p>
+              Let me know what you think about the creator, send me your character or just contact me!
+            </p>
+            <p>You can follow me (and the process of the game) on:</p>
+            <ul>
+              <li><a href="https://twitter.com/pixlerin" target=_blank>Twitter</a></li>
+              <li><a href="https://www.instagram.com/pixlerin/" target=_blank>Instagram</a></li>
+              <li><a href="https://www.youtube.com/@pixlerin" target=_blank>YouTube</a></li>
+              <li><a href="https://www.reddit.com/user/pixlerin" target=_blank>Reddit</a></li>
+            </ul>
+          </div>
+        </dialog>
+      </div>
+      <div class="window-input">
+        <input type="text" id="name" name="name" autocomplete="off" placeholder="Your Name" maxlength="64" />
+      </div>
+      <div class="window-content">
+        <div id="preview">
+          <div class="card" id="character-preview">
+            <div class="overlay" id="preview-hair-back"></div>
+            <img src="../img/P1-Skin1.svg" alt="preview-skin" class="overlay" id="preview-skin" />
+            <div class="overlay" id="preview-clothes-bottom"></div>
+            <div class="overlay" id="preview-clothes-top"></div>
+            <div class="overlay" id="preview-freckles"></div>
+            <div class="overlay" id="preview-blush"></div>
+            <div class="overlay" id="preview-lips"></div>
+            <div class="overlay" id="preview-beard"></div>
+            <div class="overlay" id="preview-eyes"></div>
+            <div class="overlay" id="preview-glasses"></div>
+            <div class="overlay" id="preview-hair-front"></div>
+          </div>
+          <div class="preview-button-container">
+            <div></div>
+            <button id="photo" title="Download Photo">
+              <img src="../img/download.png" ald="Download Photo"/>
+            </button>
+            <button id="randomize" title="Random Character">
+              <img src="../img/randomize.png" ald="Random Character"/>
+            </button>
+          </div>
+        </div>
+        <div class="options">
+          <details>
+            <summary>Body</summary>
+            <div class="card">
+              <div class="button-container">
+                <button role="button" id="body1">Body 1</button>
+                <button role="button" id="body2">Body 2</button>  
+              </div>
+              <p>Skin: <span class="skin"></span></p>
+              <div class="slider-container">
+                <button class="arrow" id="skin-left">-</button>
+                <input type="range" min="1" max="9" value="1" class="slider" id="skin">
+                <button class="arrow" id="skin-right">+</button>
+              </div>
+            </details>
+
+            <details>
+              <summary>Face</summary>
+              <div class="card">
+                <p>Eyes: <span class="eyes"></span></p>
+                <div class="slider-container">
+                  <button class="arrow" id="eyes-left">-</button>
+                  <input type="range" min="1" max="9" value="1" class="slider" id="eyes">
+                  <button class="arrow" id="eyes-right">+</button>
+                </div>
+                <div class="color-container">
+                  <div class="color eyecolor" style="background-color: #151f2b;"></div>
+                  <div class="color eyecolor" style="background-color: #403D30;"></div>
+                  <div class="color eyecolor" style="background-color: #593A34;"></div>
+                  <div class="color eyecolor" style="background-color: #704723;"></div>
+                  <div class="color eyecolor" style="background-color: #8a6c35;"></div>
+                  <div class="color eyecolor" style="background-color: #855A5B;"></div>
+                  <div class="color eyecolor" style="background-color: #84315a;"></div>
+                  <div class="color eyecolor" style="background-color: #981312;"></div>
+                  <div class="color eyecolor" style="background-color: #c85520;"></div>
+                  <div class="color eyecolor" style="background-color: #F2CE32;"></div>
+                  <div class="color eyecolor" style="background-color: #d9be82;"></div>
+                  <div class="color eyecolor" style="background-color: #959090;"></div>
+                  <div class="color eyecolor" style="background-color: #D0C9B9;"></div>
+                  <div class="color eyecolor" style="background-color: #d9a3ba;"></div>
+                  <div class="color eyecolor" style="background-color: #FF9FB0;"></div>
+                  <div class="color eyecolor" style="background-color: #c43eb0;"></div>
+                  <div class="color eyecolor" style="background-color: #4c3173;"></div>
+                  <div class="color eyecolor" style="background-color: #0b1a5b;"></div>
+                  <div class="color eyecolor" style="background-color: #233999;"></div>
+                  <div class="color eyecolor" style="background-color: #378CDC;"></div>
+                  <div class="color eyecolor" style="background-color: #9BBCC7;"></div>
+                  <div class="color eyecolor" style="background-color: #56CBB5;"></div>
+                  <div class="color eyecolor" style="background-color: #328678;"></div>
+                  <div class="color eyecolor" style="background-color: #359A51;"></div>
+                  <div class="color eyecolor" style="background-color: #1a4c25;"></div>
+                  <div class="color eyecolor" style="background-color: #2c4c0e;"></div>
+                </div>
+              </div>
+            </details>
+
+            <details>
+              <summary>Hair</summary>
+              <div class="card">
+                <p>Hair front: <span class="hair-front"></span></p>
+                <div class="slider-container">
+                  <button class="arrow" id="hair-front-left">-</button>
+                  <input type="range" min="1" max="16" value="1" class="slider" id="hair-front">
+                  <button class="arrow" id="hair-front-right">+</button>
+                </div>
+                <hr />
+                <p>Hair back: <span class="hair-back"></span></p>
+                <div class="slider-container">
+                  <button class="arrow" id="hair-back-left">-</button>
+                  <input type="range" min="0" max="9" value="1" class="slider" id="hair-back">
+                  <button class="arrow" id="hair-back-right">+</button>
+                </div>
+                <div class="color-container">
+                  <div class="color haircolor" style="background-color: #151f2b;"></div>
+                  <div class="color haircolor" style="background-color: #403D30;"></div>
+                  <div class="color haircolor" style="background-color: #593A34;"></div>
+                  <div class="color haircolor" style="background-color: #704723;"></div>
+                  <div class="color haircolor" style="background-color: #8a6c35;"></div>
+                  <div class="color haircolor" style="background-color: #855A5B;"></div>
+                  <div class="color haircolor" style="background-color: #84315a;"></div>
+                  <div class="color haircolor" style="background-color: #981312;"></div>
+                  <div class="color haircolor" style="background-color: #c85520;"></div>
+                  <div class="color haircolor" style="background-color: #F2CE32;"></div>
+                  <div class="color haircolor" style="background-color: #d9be82;"></div>
+                  <div class="color haircolor" style="background-color: #959090;"></div>
+                  <div class="color haircolor" style="background-color: #D0C9B9;"></div>
+                  <div class="color haircolor" style="background-color: #d9a3ba;"></div>
+                  <div class="color haircolor" style="background-color: #FF9FB0;"></div>
+                  <div class="color haircolor" style="background-color: #c43eb0;"></div>
+                  <div class="color haircolor" style="background-color: #4c3173;"></div>
+                  <div class="color haircolor" style="background-color: #0b1a5b;"></div>
+                  <div class="color haircolor" style="background-color: #233999;"></div>
+                  <div class="color haircolor" style="background-color: #378CDC;"></div>
+                  <div class="color haircolor" style="background-color: #9BBCC7;"></div>
+                  <div class="color haircolor" style="background-color: #56CBB5;"></div>
+                  <div class="color haircolor" style="background-color: #328678;"></div>
+                  <div class="color haircolor" style="background-color: #359A51;"></div>
+                  <div class="color haircolor" style="background-color: #1a4c25;"></div>
+                  <div class="color haircolor" style="background-color: #2c4c0e;"></div>
+                </div>
+              </div>
+            </details>
+
+            <details>
+              <summary>Details</summary>
+              <div class="card">
+                <div class="color-container">
+                  <input type="checkbox" id="blush">
+                  <label for="blush">Blush</label>
+                  <div class="color blushcolor-palette" style="background-color: #b06643;"></div>
+                  <div class="color blushcolor-palette" style="background-color: #b04383;"></div>
+                </div>
+                <div class="color-container">
+                  <input type="checkbox" id="lip-color">
+                  <label for="lip-color">Lip Color</label>
+                  <div class="color lipcolor-palette" style="background-color: #000000;"></div>
+                  <div class="color lipcolor-palette" style="background-color: #380000;"></div>
+                  <div class="color lipcolor-palette" style="background-color: #822121;"></div>
+                  <div class="color lipcolor-palette" style="background-color: #b92272;"></div>
+                  <div class="color lipcolor-palette" style="background-color: #832b7f;"></div>
+                  <div class="color lipcolor-palette" style="background-color: #623391;"></div>
+                  <div class="color lipcolor-palette" style="background-color: #a7823d;"></div>
+                </div>
+                <div class="color-container">
+                  <input type="checkbox" id="freckles">
+                  <label for="freckles">Freckles</label>
+                </div>
+              </div>
+              <hr />
+              <div class="card">
+                Glasses: <span class="glasses"></span>
+                <div class="slider-container">
+                  <button class="arrow" id="glasses-left">-</button>
+                  <input type="range" min="0" max="4" value="1" class="slider" id="glasses">
+                  <button class="arrow" id="glasses-right">+</button>
+                </div>
+                <div class="color-container">
+                  <div class="color glassescolor-palette" style="background-color: #000000;"></div>
+                  <div class="color glassescolor-palette" style="background-color: #886a23;"></div>
+                  <div class="color glassescolor-palette" style="background-color: #494742;"></div>
+                  <div class="color glassescolor-palette" style="background-color: #0f0e2b;"></div>
+                  <div class="color glassescolor-palette" style="background-color: #0e2b1a;"></div>
+                  <div class="color glassescolor-palette" style="background-color: #ffffff;"></div>
+                </div>
+              </div>
+              <hr />
+              <div class="card">
+                Beard: <span class="beard"></span>
+                <div class="slider-container">
+                  <button class="arrow" id="beard-left">-</button>
+                  <input type="range" min="0" max="5" value="1" class="slider" id="beard">
+                  <button class="arrow" id="beard-right">+</button>
+                </div>
+              </div>
+            </details>
+
+            <details>
+              <summary>Clothes</summary>
+              <div class="card">
+                Top: <span class="clothes-top"></span>
+                <div class="slider-container">
+                  <button class="arrow" id="clothes-top-left">-</button>
+                  <input type="range" min="1" max="5" value="1" class="slider" id="clothes-top">
+                  <button class="arrow" id="clothes-top-right">+</button>
+                </div>
+                <div class="color-container">
+                  <div class="color clothestopcolor-palette" style="background-color: #151f2b;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #403D30;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #593A34;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #704723;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #8a6c35;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #855A5B;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #84315a;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #981312;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #c85520;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #F2CE32;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #d9be82;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #959090;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #D0C9B9;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #d9a3ba;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #FF9FB0;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #c43eb0;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #4c3173;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #0b1a5b;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #233999;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #378CDC;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #9BBCC7;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #56CBB5;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #328678;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #359A51;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #1a4c25;"></div>
+                  <div class="color clothestopcolor-palette" style="background-color: #2c4c0e;"></div>
+                </div>
+              </div>
+              <hr />
+              <div class="card">
+                Bottom: <span class="clothes-bottom"></span>
+                <div class="slider-container">
+                  <button class="arrow" id="clothes-bottom-left">-</button>
+                  <input type="range" min="1" max="8" value="1" class="slider" id="clothes-bottom">
+                  <button class="arrow" id="clothes-bottom-right">+</button>
+                </div>
+                <div class="color-container">
+                  <div class="color clothesbottomcolor-palette" style="background-color: #151f2b;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #403D30;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #593A34;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #704723;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #8a6c35;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #855A5B;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #84315a;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #981312;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #c85520;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #F2CE32;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #d9be82;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #959090;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #D0C9B9;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #d9a3ba;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #FF9FB0;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #c43eb0;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #4c3173;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #0b1a5b;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #233999;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #378CDC;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #9BBCC7;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #56CBB5;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #328678;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #359A51;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #1a4c25;"></div>
+                  <div class="color clothesbottomcolor-palette" style="background-color: #2c4c0e;"></div>
+                </div>
+              </div>
+              <hr />
+              <div class="card">
+                Shoes:
+                <div class="color-container">
+                  <div class="color shoecolor-palette" style="background-color: #151f2b;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #403D30;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #593A34;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #704723;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #8a6c35;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #855A5B;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #84315a;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #981312;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #c85520;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #F2CE32;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #d9be82;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #959090;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #D0C9B9;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #d9a3ba;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #FF9FB0;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #c43eb0;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #4c3173;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #0b1a5b;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #233999;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #378CDC;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #9BBCC7;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #56CBB5;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #328678;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #359A51;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #1a4c25;"></div>
+                  <div class="color shoecolor-palette" style="background-color: #2c4c0e;"></div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./creator.js"></script>
+    <script src="../img/eyes.js"></script>
+    <script src="../img/hair-back.js"></script>
+    <script src="../img/hair-front.js"></script>
+    <script src="../img/glasses.js"></script>
+    <script src="../img/beard.js"></script>
+    <script src="../img/p1-clothes-top.js"></script>
+    <script src="../img/p2-clothes-top.js"></script>
+    <script src="../img/p1-clothes-bottom.js"></script>
+    <script src="../img/p2-clothes-bottom.js"></script>
+  </body>
+</html>
