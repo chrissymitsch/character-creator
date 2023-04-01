@@ -102,7 +102,7 @@ details, .window, .card {
   border: 0;
   border-radius: 0;
   padding: 4px;
-  padding-left: 1rem;
+  padding-left: 2rem;
   background: transparent;
   font-family: monospace;
   font-weight: 600;
@@ -119,6 +119,7 @@ details, .window, .card {
 
 .window-input:before {
   content: '>';
+  position: absolute;
   font-family: monospace;
   font-weight: 600;
   color: #15bc98;
