@@ -152,7 +152,7 @@ window.addEventListener('load', function() {
 
     function setSkin(selected = selectedSkin) {
         selectedSkin = selected;
-        document.querySelector('#preview-skin').src = '../img/P' + selectedBody + '-Skin' + selected + '.svg';
+        document.querySelector('#preview-skin').src = './img/P' + selectedBody + '-Skin' + selected + '.svg';
         document.querySelector('.skin').innerHTML = selected;
         setClothesTop();
         setClothesBottom();
@@ -304,7 +304,7 @@ window.addEventListener('load', function() {
 
     function setFreckles() {
         if (selectedFreckles) {
-            document.querySelector('#preview-freckles').innerHTML = `<img src="../img/Extras-Freckles.svg" alt="preview-freckles" />`;
+            document.querySelector('#preview-freckles').innerHTML = `<img src="./img/Extras-Freckles.svg" alt="preview-freckles" />`;
         } else {
             document.querySelector('#preview-freckles').innerHTML = '';
         }
