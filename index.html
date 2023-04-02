@@ -8,6 +8,29 @@
   </head>
   <body>
     <script src="./dom-to-image.min.js"></script>
+
+    <dialog id="cookie-dialog" class="window">
+      <div class="dialog-header">
+        <h2>>cookies</h2>
+        <form method="dialog">
+          <button class="close toggle">X</button>
+        </form>
+      </div>
+      <div class="dialog-content">
+        <p>
+          Do you want to save your character settings in cookies?
+        </p>
+        <p>
+          This website only saves the settings you have made in the character-creator.
+          No personal data will be saved!
+        </p>
+        <div class="button-container">
+          <button id="decline-cookie">No!</button>
+          <button id="accept-cookie">Yes!</button>
+        </div>
+      </div>
+    </dialog>
+
     <div class="window">
       <div class="window-header">
         <h2>>Character-Creator Prototype</h2>
@@ -38,7 +61,7 @@
               <li><a href="https://www.youtube.com/@pixlerin" target=_blank>YouTube</a></li>
               <li><a href="https://www.reddit.com/user/pixlerin" target=_blank>Reddit</a></li>
             </ul>
-            <p align="right"><small>v1.2 - 20230402</small></p>
+            <p align="right"><small>v1.3 - 20230402-1</small></p>
           </div>
         </dialog>
       </div>
@@ -63,7 +86,7 @@
           <div class="preview-button-container">
             <div></div>
             <button id="photo" title="Download Photo">
-              <img src="./img/download.png" ald="Download Photo"/>
+              <img src="./img/download.png" ald="Download and Save"/>
             </button>
             <button id="randomize" title="Random Character">
               <img src="./img/randomize.png" ald="Random Character"/>

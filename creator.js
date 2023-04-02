@@ -1,5 +1,8 @@
 window.addEventListener('load', function() {
     const dialog = document.querySelector("#dialog");
+    const consentCookie = 'cookieConsent=true';
+    const cookieDialog = document.querySelector("#cookie-dialog");
+    let cookieConsentSet = document.cookie?.includes(consentCookie);
 
     let selectedBody;
     let selectedSkin;
@@ -16,14 +19,61 @@ window.addEventListener('load', function() {
     let selectedLips;
     let selectedLipsColor;
     let selectedFreckles;
-
     let selectedClothesTop;
     let selectedClothesTopColor;
     let selectedClothesBottom;
     let selectedClothesBottomColor;
     let selectedShoeColor;
-    setRandomValues();
+
+    if (this.document.cookie?.length > 0 && this.document.cookie?.includes('body')) {
+        setFromCookies();
+    } else {
+        setRandomValues();
+    }
+
+    function crumbleCookies() {
+        const cookies = document.cookie?.split('; ');
+        const allCookies = {};
+        cookies.forEach(cookie => {
+            const crumbles = cookie.split('=');
+            allCookies[crumbles[0]] = crumbles[1];
+        })
+        return allCookies;
+    }
     
+    function setFromCookies() {
+        const cookies = crumbleCookies();
+        selectedBody = cookies['body'];
+        selectedSkin = cookies['skin'];
+        selectedEyes = cookies['eyes'];
+        selectedEyeColor = cookies['eyecolor'];
+        selectedGlasses = cookies['glasses'];
+        selectedGlassesColor = cookies['glassescolor'];
+        selectedHairBack = cookies['hairback'];
+        selectedHairFront = cookies['hairfront'];
+        selectedBeard = cookies['beard'];
+        selectedHairColor = cookies['haircolor'];
+        selectedBlush = cookies['blush'] === 'true';
+        selectedBlushColor = cookies['blushcolor'];
+        selectedLips = cookies['lips'] === 'true';
+        selectedLipsColor = cookies['lipscolor'];
+        selectedFreckles = cookies['freckles'] === 'true';
+        selectedClothesTop = cookies['clothestop'];
+        selectedClothesTopColor = cookies['clothestopcolor'];
+        selectedClothesBottom = cookies['clothesbottom'];
+        selectedClothesBottomColor = cookies['clothesbottomcolor'];
+        selectedShoeColor = cookies['shoecolor'];
+
+        getColor('.eyecolor', selectedEyeColor);
+        getColor('.haircolor', selectedHairColor);
+        getColor('.clothestopcolor-palette', selectedClothesTopColor);
+        getColor('.clothesbottomcolor-palette', selectedClothesBottomColor);
+        getColor('.shoecolor-palette', selectedShoeColor);
+        getColor('.blushcolor-palette', selectedBlushColor);
+        getColor('.lipcolor-palette', selectedLipsColor);
+        getColor('.glassescolor-palette', selectedGlassesColor);
+    }
+
     function setRandomValues() {
         selectedBody = Math.floor(Math.random() * 2) + 1;
         selectedSkin = Math.floor(Math.random() * 9) + 1;
@@ -85,6 +135,15 @@ window.addEventListener('load', function() {
         const rnd = Math.floor(Math.random() * numerOfColors);
         allColors[rnd].classList.add('selected');
         return allColors[rnd].style.backgroundColor;
+    }
+
+    function getColor(className, colorValue) {
+        const allColors = document.querySelectorAll(className);
+        allColors.forEach(col => {
+            if (col.style.backgroundColor == colorValue) {
+                col.classList.add('selected');
+            }
+        })
     }
 
     const randomizer = document.querySelector('#randomize');
@@ -362,7 +421,7 @@ window.addEventListener('load', function() {
         colors.forEach(color => {
             color.addEventListener('click', (e) => {
                 const selected = document.querySelector(`.${className}.selected`);
-                selected.classList.remove('selected');
+                selected?.classList.remove('selected');
                 e.target.classList.add('selected');
                 const backgroundColor = e.target.style?.backgroundColor;
                 setFunction(undefined, backgroundColor);
@@ -500,6 +559,14 @@ window.addEventListener('load', function() {
     let characterName = 'Character';
     const photoButton = document.querySelector('#photo');
     photoButton.addEventListener('click', () => {
+        if (!cookieConsentSet) {
+            cookieDialog.showModal();
+            registerCookieConsent();
+        }
+        if (cookieConsentSet && document.cookie?.includes(consentCookie)) {
+            bakeCookies();
+        }
+
         const preview = document.querySelector('#character-preview');
         const transformStyle = preview.style.transform;
         preview.style.transform = 'scale(1)';
@@ -519,5 +586,43 @@ window.addEventListener('load', function() {
                 console.error('Could not take photo, sorry!', error);
                 preview.style.transform = transformStyle;
             });
-    })
+    });
+
+    function registerCookieConsent() {
+        const declineCookie = document.querySelector('#decline-cookie');
+        const acceptCookie = document.querySelector('#accept-cookie');
+        declineCookie.addEventListener('click', () => {
+            cookieConsentSet = true;
+            cookieDialog.close();
+        })
+        acceptCookie.addEventListener('click', () => {
+            cookieConsentSet = true;
+            document.cookie = consentCookie;
+            bakeCookies();
+            cookieDialog.close();
+        })
+    }
+
+    function bakeCookies() {
+        document.cookie = `body=${selectedBody}`;
+        document.cookie = `skin=${selectedSkin}`;
+        document.cookie = `eyes=${selectedEyes}`;
+        document.cookie = `eyecolor=${selectedEyeColor}`;
+        document.cookie = `glasses=${selectedGlasses}`;
+        document.cookie = `glassescolor=${selectedGlassesColor}`;
+        document.cookie = `hairback=${selectedHairBack}`;
+        document.cookie = `hairfront=${selectedHairFront}`;
+        document.cookie = `beard=${selectedBeard}`;
+        document.cookie = `haircolor=${selectedHairColor}`;
+        document.cookie = `blush=${selectedBlush}`;
+        document.cookie = `blushcolor=${selectedBlushColor}`;
+        document.cookie = `lips=${selectedLips}`;
+        document.cookie = `lipscolor=${selectedLipsColor}`;
+        document.cookie = `freckles=${selectedFreckles}`;
+        document.cookie = `clothestop=${selectedClothesTop}`;
+        document.cookie = `clothestopcolor=${selectedClothesTopColor}`;
+        document.cookie = `clothesbottom=${selectedClothesBottom}`;
+        document.cookie = `clothesbottomcolor=${selectedClothesBottomColor}`;
+        document.cookie = `shoecolor=${selectedShoeColor}`;
+    }
 });
