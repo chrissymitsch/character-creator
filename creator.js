@@ -500,7 +500,10 @@ window.addEventListener('load', function() {
     let characterName = 'Character';
     const photoButton = document.querySelector('#photo');
     photoButton.addEventListener('click', () => {
-        domtoimage.toPng(document.querySelector('#character-preview'))
+        const preview = document.querySelector('#character-preview');
+        const transformStyle = preview.style.transform;
+        preview.style.transform = 'scale(1)';
+        domtoimage.toPng(preview)
             .then((dataUrl) => {
                 // const img = new Image();
                 // img.src = dataUrl;
@@ -510,9 +513,11 @@ window.addEventListener('load', function() {
                 link.download = `${characterName}.png`;
                 link.href = dataUrl;
                 link.click();
+                preview.style.transform = transformStyle;
             })
             .catch((error) => {
                 console.error('Could not take photo, sorry!', error);
+                preview.style.transform = transformStyle;
             });
     })
 });
