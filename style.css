@@ -187,7 +187,7 @@ hr {
   box-shadow: 0 0 1px 0 #ff472e, 0 0 2px 0 #ff472e, 0 0 10px 0 #ff472e;
 }
 
-.button-container, .preview-button-container {
+.button-container {
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr 1fr;
@@ -195,7 +195,10 @@ hr {
 }
 
 .preview-button-container {
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  width: 100%;
+  padding-bottom: 1rem;
+  justify-content: space-between;
 }
 
 button {
@@ -245,7 +248,7 @@ button#photo {
   padding: 0.5rem;
 }
 
-button#randomize {
+button#randomize, button#share {
   margin-top: 1rem;
   width: 3rem;
   height: 3rem;

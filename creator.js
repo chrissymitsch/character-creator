@@ -3,6 +3,10 @@ window.addEventListener('load', function() {
     const consentCookie = 'cookieConsent=true';
     const cookieDialog = document.querySelector("#cookie-dialog");
     let cookieConsentSet = document.cookie?.includes(consentCookie);
+    const queryParams = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop)
+    });
+    let queryCharacter = queryParams?.character;
 
     let selectedBody;
     let selectedSkin;
@@ -25,14 +29,16 @@ window.addEventListener('load', function() {
     let selectedClothesBottomColor;
     let selectedShoeColor;
 
-    if (this.document.cookie?.length > 0 && this.document.cookie?.includes('body')) {
-        setFromCookies();
+    if (queryCharacter) {
+        setFrom(atob(queryCharacter));
+    } else if (this.document.cookie?.length > 0 && this.document.cookie?.includes('body')) {
+        setFrom(this.document.cookie);
     } else {
         setRandomValues();
     }
 
-    function crumbleCookies() {
-        const cookies = document.cookie?.split('; ');
+    function crumbleCookies(input) {
+        const cookies = input?.split('; ');
         const allCookies = {};
         cookies.forEach(cookie => {
             const crumbles = cookie.split('=');
@@ -41,8 +47,8 @@ window.addEventListener('load', function() {
         return allCookies;
     }
     
-    function setFromCookies() {
-        const cookies = crumbleCookies();
+    function setFrom(input) {
+        const cookies = crumbleCookies(input);
         selectedBody = cookies['body'];
         selectedSkin = cookies['skin'];
         selectedEyes = cookies['eyes'];
@@ -63,6 +69,8 @@ window.addEventListener('load', function() {
         selectedClothesBottom = cookies['clothesbottom'];
         selectedClothesBottomColor = cookies['clothesbottomcolor'];
         selectedShoeColor = cookies['shoecolor'];
+
+        document.querySelector('#name').value = cookies['name'] || '';
 
         getColor('.eyecolor', selectedEyeColor);
         getColor('.haircolor', selectedHairColor);
@@ -624,5 +632,41 @@ window.addEventListener('load', function() {
         document.cookie = `clothesbottom=${selectedClothesBottom}`;
         document.cookie = `clothesbottomcolor=${selectedClothesBottomColor}`;
         document.cookie = `shoecolor=${selectedShoeColor}`;
+    }
+
+    const shareButton = document.querySelector('#share');
+    shareButton.addEventListener('click', () => {
+        createShareCode();
+    })
+
+    function createShareCode() {
+        let decodedSettings = `name=${document.querySelector('#name').value || ''}`;
+        decodedSettings += `; body=${selectedBody}`;
+        decodedSettings += `; skin=${selectedSkin}`;
+        decodedSettings += `; eyes=${selectedEyes}`;
+        decodedSettings += `; eyecolor=${selectedEyeColor}`;
+        decodedSettings += `; glasses=${selectedGlasses}`;
+        decodedSettings += `; glassescolor=${selectedGlassesColor}`;
+        decodedSettings += `; hairback=${selectedHairBack}`;
+        decodedSettings += `; hairfront=${selectedHairFront}`;
+        decodedSettings += `; beard=${selectedBeard}`;
+        decodedSettings += `; haircolor=${selectedHairColor}`;
+        decodedSettings += `; blush=${selectedBlush}`;
+        decodedSettings += `; blushcolor=${selectedBlushColor}`;
+        decodedSettings += `; lips=${selectedLips}`;
+        decodedSettings += `; lipscolor=${selectedLipsColor}`;
+        decodedSettings += `; freckles=${selectedFreckles}`;
+        decodedSettings += `; clothestop=${selectedClothesTop}`;
+        decodedSettings += `; clothestopcolor=${selectedClothesTopColor}`;
+        decodedSettings += `; clothesbottom=${selectedClothesBottom}`;
+        decodedSettings += `; clothesbottomcolor=${selectedClothesBottomColor}`;
+        decodedSettings += `; shoecolor=${selectedShoeColor}`;
+
+        const shareData = {
+            title: "I created a pixel art character",
+            text: "Check out my character that I just created!",
+            url: `${window.location.origin}${window.location.pathname}?character=${btoa(decodedSettings)}`,
+        };
+        navigator.share(shareData);
     }
 });
